@@ -1,0 +1,10 @@
+.tableChild{
+  height: 0px;
+  padding: 0;
+  transition: all ease-in-out 0.4s;
+}
+input[name="openTable"]:checked~.tableChild {
+  height: auto;
+  padding: 10px 20px;
+  transition: all ease-in-out 0.4s;
+}

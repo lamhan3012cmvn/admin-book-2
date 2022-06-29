@@ -1,0 +1,20 @@
+.modal {
+  overflow:hidden;
+  transition: all 0.5s ease-in-out;
+}
+.modal.active {
+  height: 100vh;
+  transition: all 0.5s ease-in-out;
+}
+
+.modal-overlay {
+  /* border: none; */
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  /* border-radius: 10px; */
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  /* background: linear-gradient(90deg, rgba(50, 49, 71, 0.6110819327731092) 0%, rgba(0, 212, 255, 1) 100%); */
+}
+

@@ -1,0 +1,43 @@
+.productDetail {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.productDetail-overlay {
+  background: linear-gradient(90deg, rgba(50, 49, 71, 0.6110819327731092) 0%, rgba(0, 212, 255, 1) 100%);
+}
+
+.productDetail-content {
+  overflow-y: scroll;
+}
+
+.productDetail-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.productDetail-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  padding: 20px 0;
+}
+
+.productDetail-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.productDetail-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.productDetail-modal.active {
+  height: 100vh;
+  transition: all 0.5s ease-in-out;
+}
+
+.productDetail-modal {
+  overflow:hidden;
+  transition: all 0.5s ease-in-out;
+}

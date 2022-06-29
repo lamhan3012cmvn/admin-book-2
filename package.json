@@ -1,0 +1,49 @@
+{
+  "name": "pureagawood_v1",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.4.1",
+    "@hookform/resolvers": "^2.8.4",
+    "@reduxjs/toolkit": "^1.6.1",
+    "@tinymce/tinymce-react": "^3.13.0",
+    "axios": "^0.21.1",
+    "chart.js": "^3.5.1",
+    "moment": "^2.29.1",
+    "query-string": "^7.0.1",
+    "react": "^17.0.0",
+    "react-chartjs-2": "^3.0.5",
+    "react-dom": "^17.0.0",
+    "react-hook-form": "^7.20.5",
+    "react-html-parser": "^2.0.2",
+    "react-icons": "^4.2.0",
+    "react-inner-image-zoom": "^2.1.0",
+    "react-js-pagination": "^3.0.3",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-slick": "^0.28.1",
+    "react-sweet-state": "^2.5.2",
+    "react-toastify": "^8.0.3",
+    "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
+    "tailwindcss": "^2.2.16",
+    "tailwindcss-animatecss": "^1.0.7",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.0",
+    "autoprefixer": "^10.3.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.6",
+    "jest-config": "^27.0.6",
+    "postcss": "^8.3.6",
+    "prettier": "^2.2.1",
+    "vite": "^2.5.4"
+  }
+}
