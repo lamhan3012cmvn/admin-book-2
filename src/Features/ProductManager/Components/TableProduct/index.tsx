@@ -18,8 +18,9 @@ import ProductForm from '../ProductForm';
 import Pagination from 'react-js-pagination';
 import { findAllProduct } from '../../../../Apis';
 import useDebounce from '../../../../hooks/useDebounce';
+import axiosClient from '../../../../Apis/clientAxios';
 
-interface Props {}
+interface Props { }
 
 interface IViewTableProduct {
 	handleShowDetail: (
@@ -45,13 +46,13 @@ const ViewTableProduct = ({
 	const [str, setStr] = useState('');
 
 	const getProductAsync = async (currenPage: number, str: string) => {
-		const result:any = await findAllProduct({
+		const result: any = await findAllProduct({
 			pageNo: currenPage - 1,
 			search: str
 		});
-		console.log("result",result)
-		if (result?.length>0)
-			pActions.getProductSuccess(result,result.length);
+		console.log("result", result)
+		if (result?.length > 0)
+			pActions.getProductSuccess(result, result.length);
 		else pActions.getProductError();
 	};
 
@@ -59,14 +60,22 @@ const ViewTableProduct = ({
 		getProductAsync(pState.pageNo, str);
 	}, [pState.pageNo, str]);
 
-	const handleUpdateIdProduct = (id: number) => {
-		pActions.setIdProduct(id);
-		handleShowEdit();
+	const handleUpdateIdProduct = (data:any) => {
+		pActions.setProductDetail(data);
+		// handleShowEdit();
+		handleShowCreateProduct();
 	};
 
 	const handlePageChange = (pageNumber: number) => {
 		pActions.setPageNo(pageNumber);
 	};
+
+
+	const handleDeleteProduct = async (id: string) => {
+		const product = await axiosClient.delete(`book/${id}`)
+		console.log(product)
+	}
+
 	return (
 		<div className='rounded bg-white border border-gray-300'>
 			<div className='flex items-center justify-between px-5'>
@@ -102,7 +111,7 @@ const ViewTableProduct = ({
 					</tr>
 				</thead>
 				<tbody className='text-gray-600'>
-				{pState.products.map((e, i) => {
+					{pState.products.map((e, i) => {
 						return (
 							<React.Fragment key={i}>
 								<tr>
@@ -130,17 +139,20 @@ const ViewTableProduct = ({
 									<td className='border border-l-0 border-r-0 px-4 py-2 text-center'>
 										<ActionWrapper>
 											<label htmlFor={`child${i}`}>
-												<ActionTable onClick={() => {}}>
+												<ActionTable onClick={() => { }}>
 													<FaEye />
 												</ActionTable>
 											</label>
-											<ActionTable onClick={() => handleUpdateIdProduct(e.id)}>
+											<ActionTable onClick={() => handleUpdateIdProduct(e)}>
 												<FaPencilAlt />
+											</ActionTable>
+											<ActionTable onClick={() => { handleDeleteProduct(e?.id) }}>
+												<FaTrashAlt />
 											</ActionTable>
 										</ActionWrapper>
 									</td>
 								</tr>
-						
+
 								{e?.productTexts?.length > 0 && (
 									<tr>
 										<td colSpan={keysLength}>
@@ -196,11 +208,10 @@ const ViewTableProduct = ({
 																		</td>
 																		<td className='border border-l-0 px-4 py-2 border-green-400'>
 																			<span
-																				className={` px-3 py-2 text-white rounded-md select-none ${
-																					data.inventory === 1
+																				className={` px-3 py-2 text-white rounded-md select-none ${data.inventory === 1
 																						? 'bg-green-400'
 																						: 'bg-red-400'
-																				}`}>
+																					}`}>
 																				{data.inventory
 																					? 'Còn hàng'
 																					: 'Hết hàng'}
@@ -211,11 +222,10 @@ const ViewTableProduct = ({
 																		</td>
 																		<td className='border border-l-0 px-4 py-2 border-green-400'>
 																			<span
-																				className={` px-3 py-2 text-white rounded-md select-none ${
-																					data.status === 1
+																				className={` px-3 py-2 text-white rounded-md select-none ${data.status === 1
 																						? 'bg-green-400'
 																						: 'bg-red-400'
-																				}`}>
+																					}`}>
 																				{data.status
 																					? 'Đang hoạt động'
 																					: 'Không hoạt động'}
@@ -238,9 +248,7 @@ const ViewTableProduct = ({
 																					}>
 																					<FaPencilAlt />
 																				</ActionTable>
-																				{/* <ActionTable onClick={() => { }}>
-																					<FaTrashAlt />
-																				</ActionTable> */}
+
 																			</ActionWrapper>
 																		</td>
 																	</tr>
@@ -323,6 +331,9 @@ const TableProduct = () => {
 	const handleShowCreateProduct = () => {
 		setShowCreateProduct(true);
 	};
+
+
+
 	return (
 		<div>
 			{/* {showCreateProduct && (

@@ -20,9 +20,10 @@ const TableBillManager = ({
 	const [lang, setLang] = React.useState(0);
 
 	const getBillManagerApi = async (page: number, lang: number) => {
-		const result = await getBillManagerAsync(page, lang);
-		if (result.success) {
-			billActions.setBillManager(result.data.datas, result.data.totalItem);
+		const result:any = await getBillManagerAsync();
+		console.log("result",result)
+		if (result) {
+			billActions.setBillManager(result, result.length);
 		} else {
 			billActions.setBillManager([], 0);
 		}
@@ -83,23 +84,23 @@ const TableBillManager = ({
 						</tr>
 					</thead>
 					<tbody className='text-gray-600'>
-						{billState.bills.map((item, i) => {
+						{billState.bills.map((item:any, i) => {
 							return (
 								<tr key={i}>
 									<td className='border border-l-0 px-4 py-2 text-left text-black'>
-										{item.name}
+										{item?.user?.fullname}
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-left text-black'>
-										{item.address}
+										{item?.address}
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
-										{item.phone}
+										{item?.phone}
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
-										{formatMoney(item.totalPrice)}
+										{formatMoney(item?.subtotal?.price)}
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
-										{moment(item.createdAt).format(" DD:mm DD/MM/YYYY")}
+										{moment(item?.createdAt).format(" DD:mm DD/MM/YYYY")}
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
 										<span
@@ -112,11 +113,11 @@ const TableBillManager = ({
 													? 'bg-green-300'
 													: 'bg-red-300'
 											}`}>
-											{listStatusOrder[item.status].value}
+											{listStatusOrder?.[item?.status]?.value}
 										</span>
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
-										{item.note}
+										{item?.note}
 									</td>
 									<td className='border border-l-0 border-r-0 px-4 py-2 text-center'>
 										<ActionWrapper>
@@ -139,7 +140,7 @@ const TableBillManager = ({
 						})}
 					</tbody>
 				</table>
-				<div className='h-[60px] flex justify-center items-center'>
+				{/* <div className='h-[60px] flex justify-center items-center'>
 					<Pagination
 						activePage={billState.pageNo}
 						itemsCountPerPage={15}
@@ -147,7 +148,7 @@ const TableBillManager = ({
 						pageRangeDisplayed={5}
 						onChange={page => billActions.setPageNo(page)}
 					/>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -4,7 +4,7 @@ import SelectBox from '../../../../Components/SelectBox';
 import { productCtx } from '../../Contexts/product.context';
 
 import './style.css';
-import { updateProductText } from '../../../../Apis';
+import { updateProduct, updateProductText } from '../../../../Apis';
 import useDebounce from '../../../../hooks/useDebounce';
 import { notify } from '../../../../helper/notify';
 import { Editor } from '@tinymce/tinymce-react/lib/cjs/main/ts/components/Editor';
@@ -25,6 +25,7 @@ const ProductForm = (props: Props) => {
 	const { hideForm } = props;
 	const [pState, pActions] = productCtx();
 	const { productDetail } = pState;
+	console.log("productDetail",productDetail)
 
 	const editorRef = React.useRef(null);
 
@@ -100,9 +101,13 @@ const ProductForm = (props: Props) => {
 			},
 			quantity: e.target['quantity'].value,
 		};
-		console.log("obj",obj)
-		const result = await updateProductText(obj);
-		console.log("result",result)
+		let result:any=undefined;
+		if(productDetail){
+			result = await updateProduct(productDetail.id,obj);
+		}else{
+			result = await updateProductText(obj);
+		}
+
 		if (result) {
 			console.log('success');
 			// pActions.getProductSuccess(result.data.datas, result.data.totalItem);
@@ -136,6 +141,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='name'
 						id='name_Product'
+						defaultValue={productDetail?.name}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -149,6 +155,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='author'
 						id='name_Product'
+						defaultValue={productDetail?.author}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -162,6 +169,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='price'
 						id='price_Product'
+						defaultValue={productDetail?.price?.price}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -175,6 +183,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='images'
 						id='price_Product'
+						defaultValue={productDetail?.image_URLs?.[0]}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -188,6 +197,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='fallIntoCategories'
 						id='price_Product'
+						defaultValue={productDetail?.fallIntoCategories?.[0]?.name}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -201,6 +211,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='quantity'
 						id='quantity_Product'
+						defaultValue={productDetail?.quantity}
 					/>
 				</div>
 
@@ -215,6 +226,7 @@ const ProductForm = (props: Props) => {
 						type='text'
 						name='publishers'
 						id='publishers_product'
+						defaultValue={productDetail?.publishers?.name}
 					/>
 				</div>
 				<div className='flex flex-col mb-4'>
@@ -226,7 +238,7 @@ const ProductForm = (props: Props) => {
 					<Editor
 						apiKey='y76jxx43mgkptc4d0yhzovx3duuirvviil3zetp2ekdkhjaq'
 						onInit={(evt, editor) => (editorRef.current = editor)}
-						initialValue={productDetail?.description || ''}
+						initialValue={productDetail?.description?.[0].description || ''}
 						init={{
 							height: 400,
 							menubar: true,

@@ -7,7 +7,7 @@ import {
 type State = {
 	products: Array<any>;
 	productDetail: any;
-	idProduct: number;
+	idProduct: string;
 	totalPage: number;
 	pageNo: number;
 };
@@ -16,7 +16,7 @@ type Actions = typeof actions;
 const initialState: State = {
 	products: [],
 	productDetail: null,
-	idProduct: -1,
+	idProduct: '',
 	totalPage: 0,
 	pageNo: 1
 };
@@ -50,7 +50,7 @@ const getProductError =
 	};
 
 const setIdProduct =
-	(id: number): Action<State> =>
+	(id: string): Action<State> =>
 	({ setState, getState }) => {
 		setState({
 			...getState(),
@@ -59,7 +59,7 @@ const setIdProduct =
 	};
 
 const setProductDetail =
-	(payload: ProductDetailModel): Action<State> =>
+	(payload: any): Action<State> =>
 	({ setState, getState }) => {
 		setState({ ...getState(), productDetail: payload });
 	};

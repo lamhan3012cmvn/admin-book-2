@@ -8,21 +8,14 @@ import Repository from '../repositoryApi';
 
 const routeGetBillManager: ApiRoutes = {
 	method: ApiMethods.GET,
-	url: 'admin/orders'
+	url: 'order/all'
 };
 export const getBillManagerAsync = async (
-	pageNo: number,
-	lang: number
 ): Promise<
-	ReturnResponse<{
-		datas: BillManagerModel[];
-		totalItem: number;
-	}>
+	ReturnResponse<any>
 > => {
 	return Repository(routeGetBillManager, {
 		params: {
-			pageNo: pageNo,
-			lang
 		}
 	});
 };

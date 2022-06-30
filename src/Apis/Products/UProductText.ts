@@ -19,3 +19,24 @@ export const updateProductText = async (
 		body: { ...payload }
 	});
 };
+
+
+const routeUpdateProduct = (id: string): ApiRoutes => {
+	return{
+		method: ApiMethods.PUT,
+		url: 'book/' + id
+	};
+}
+
+export const updateProduct = async (
+	id:string,
+	payload: any
+): Promise<ReturnResponse<{
+	datas: ProductModel[];
+	totalItem: number;
+}>> => {
+	return Repository(routeUpdateProduct(id), {
+		params: {},
+		body: { ...payload }
+	});
+};
