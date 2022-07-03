@@ -5,7 +5,7 @@ import Repository from '../repositoryApi';
 
 const routeFAllCategory: ApiRoutes = {
 	method: ApiMethods.GET,
-	url: 'book/all'
+	url: 'category'
 };
 
 export const findAllSubCategory = async (): Promise<

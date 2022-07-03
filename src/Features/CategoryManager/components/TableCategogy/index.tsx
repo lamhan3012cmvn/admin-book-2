@@ -38,6 +38,9 @@ const TableView = ({
 	handleShowUpdateCategory
 }: TableViewProps) => {
 	const [cCategory, cActions] = categoryCtx();
+
+	console.log("cCategory",cCategory)
+
 	const handleDeleteCategory = async (id: number) => {
 		const result = await delateCategory({ id });
 		if (result.success) {
@@ -74,7 +77,7 @@ const TableView = ({
 				<div className='border-b p-6'>
 					<span>Danh Sách Danh Mục</span>
 				</div>
-				<div className='flex items-center justify-end'>
+				{/* <div className='flex items-center justify-end'>
 					<div className='inline-flex'>
 						<div
 							onClick={handleShowCreateCategory}
@@ -89,54 +92,32 @@ const TableView = ({
 							<span className='text-black'>Tạo danh mục con</span>
 						</div>
 					</div>
-				</div>
+				</div> */}
 				<table className='table-auto border w-full text-left'>
 					<thead>
 						<tr className='text-black text-center'>
-							<th className='px-4 py-2 border-r'>Danh mục 🇺🇸</th>
-							<th className='px-4 py-2 border-r'>Danh mục 🇻🇳</th>
-							<th className='px-4 py-2 border-r'>Đường dẫn 🇺🇸</th>
-							<th className='px-4 py-2 border-r'>Đường dẫn 🇻🇳</th>
-							<th className='px-4 py-2 border-r'>Trạng thái</th>
-							<th className='px-4 py-2 border-r'>Cập nhật</th>
-							<th className='px-4 py-2 border-r w-[180px]' key={'action'}>
+							<th className='px-4 py-2 border-r'>ID</th>
+							<th className='px-4 py-2 border-r'>Name</th>
+							{/* <th className='px-4 py-2 border-r w-[180px]' key={'action'}>
 								{'Chức năng'}
-							</th>
+							</th> */}
 						</tr>
 					</thead>
 					<tbody className='text-gray-600'>
-						{cCategory.categories.map((e, i) => {
+						{cCategory.categories.map((e:any, i) => {
 							return (
 								<React.Fragment key={i}>
 									<tr>
 										<td className='border border-l-0 px-4 py-2 text-black'>
 											{' '}
-											{e.nameEn}
+											{e.id}
 										</td>
 										<td className='border border-l-0 px-4 py-2 text-black'>
 											{' '}
-											{e.nameVn}
+											{e.name}
 										</td>
-										<td className='border border-l-0 px-4 py-2 text-black'>
-											{' '}
-											/{e.slugEn}
-										</td>
-										<td className='border border-l-0 px-4 py-2 text-black'>
-											{' '}
-											/{e.slugVn}
-										</td>
-										<td className='border border-l-0 px-4 py-2 text-center text-black'>
-											<span
-												className={` px-3 py-2 text-white rounded-md select-none ${e.status === 1 ? 'bg-green-400' : 'bg-red-400'
-													}`}>
-												{e.status ? 'Đang hoạt động' : 'Không hoạt động'}
-											</span>
-										</td>
-										<td className='border border-l-0 px-4 py-2 text-black'>
-											{' '}
-											{moment(e.updatedAt).fromNow()}
-										</td>
-										<td className='border border-l-0 border-r-0 px-4 py-2'>
+										
+										{/* <td className='border border-l-0 border-r-0 px-4 py-2'>
 											<ActionWrapper>
 												<label htmlFor={`child${i}`}>
 													<ActionTable onClick={() => { }}>
@@ -153,9 +134,9 @@ const TableView = ({
 													<FaTrashAlt />
 												</ActionTable>
 											</ActionWrapper>
-										</td>
+										</td> */}
 									</tr>
-									{e.subCategory.length > 0 && (
+									{/* {e.subCategory.length > 0 && (
 										<tr>
 											<td colSpan={keys}>
 												<div className='overflow-hidden'>
@@ -256,7 +237,7 @@ const TableView = ({
 												</div>
 											</td>
 										</tr>
-									)}
+									)} */}
 								</React.Fragment>
 							);
 						})}

@@ -18,7 +18,7 @@ const initialState: State = {
 };
 
 const getCategorySuccess =
-	(payload: Array<CategoryModel>): Action<State> =>
+	(payload: Array<any>): Action<State> =>
 	({ setState, getState }) => {
 		setState({
 			...getState(),

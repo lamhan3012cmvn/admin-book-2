@@ -13,10 +13,10 @@ const CategoryManager = (props: Props) => {
 
   const [cState, cActions] = categoryCtx()
   const getCategoryAsync = async () => {
-    const result = await findAllSubCategory()
+    const result:any = await findAllSubCategory()
     // notify(result.message)
-    if (result.success)
-      cActions.getCategorySuccess(result.data)
+    if (result)
+      cActions.getCategorySuccess(result)
     else cActions.getCategoryError()
   }
 
