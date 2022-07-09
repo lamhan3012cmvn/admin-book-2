@@ -34,6 +34,7 @@ const LoginPage = (props: Props) => {
 			email: data.email,
 			password: data.password
 		});
+		console.log(result);
 		if (result && result?.roles.includes("ROLE_ADMIN")) {
 			localStorage.setItem('token',result.token_type+" "+ result.token);
 			notify('Đăng nhập thành công');
