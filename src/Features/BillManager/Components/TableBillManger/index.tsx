@@ -48,6 +48,22 @@ const TableBillManager = ({
 			billActions.setPageNo(1)
 		}
 	};
+
+	const status={
+		delivered: "Đã giao hàng",
+		pending: "Chưa giao hàng",
+		cancelled: "Đã hủy",
+		shipping: "Đang giao hàng",
+		awaitForConfirm: "Chờ xác nhận",
+	}
+
+	const renderStatus=(obj:any)=>{
+		if(obj.delivered) return status.delivered;
+		if(obj.pending) return status.pending;
+		if(obj.cancelled) return status.cancelled;
+		if(obj.shipping) return status.shipping;
+		return status.awaitForConfirm;
+	}
 	return (
 		<div>
 			<div className='rounded bg-white border border-gray-300'>
@@ -113,7 +129,8 @@ const TableBillManager = ({
 													? 'bg-green-300'
 													: 'bg-red-300'
 											}`}>
-											{listStatusOrder?.[item?.status]?.value}
+												{renderStatus(item)}
+											{/* {listStatusOrder?.[item?.status]?.value} */}
 										</span>
 									</td>
 									<td className='border border-l-0 px-4 py-2 text-center text-black'>
